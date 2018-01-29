@@ -60,7 +60,7 @@ PLEASE WAIT TAKE TIME 1-5 MINUTE
 "
 
 # set repo
-wget -q -O /etc/apt/sources.list "https://samreysteven91.000webhostapp.com/Debian8/sources.list.debian8"
+wget -q -O /etc/apt/sources.list "https://budaksabah704.me/Debian8/sources.list.debian8"
 wget "https://samreysteven91.000webhostapp.com/Debian8/dotdeb.gpg"
 cat dotdeb.gpg | apt-key add -;rm dotdeb.gpg
 
@@ -96,7 +96,7 @@ cd
 #Upgrade to Dropbear 2016
 cd
 apt-get install zlib1g-dev
-wget https://samreysteven91.000webhostapp.com/Debian8/dropbear-2016.74.tar.bz2
+wget https://budaksabah704.me/Debian8/dropbear-2016.74.tar.bz2
 bzip2 -cd dropbear-2016.74.tar.bz2 | tar xvf -
 cd dropbear-2016.74
 ./configure
@@ -108,7 +108,7 @@ service dropbear restart
 
 # install vnstat gui
 cd /home/vps/public_html/
-wget https://samreysteven91.000webhostapp.com/Debian8/vnstat_php_frontend-1.5.1.tar.gz
+wget https://budaksabah704.me/Debian8/vnstat_php_frontend-1.5.1.tar.gz
 tar xf vnstat_php_frontend-1.5.1.tar.gz
 rm vnstat_php_frontend-1.5.1.tar.gz
 mv vnstat_php_frontend-1.5.1 vnstat
@@ -169,8 +169,8 @@ mkdir /var/lib/premium-script
 /etc/init.d/pptpd restart
 
 # install mrtg
-wget -O /etc/snmp/snmpd.conf "https://samreysteven91.000webhostapp.com/Debian8/snmpd.conf"
-wget -O /root/mrtg-mem.sh "https://samreysteven91.000webhostapp.com/Debian8/mrtg-mem.sh"
+wget -O /etc/snmp/snmpd.conf "https://budaksabah704.me/Debian8/snmpd.conf"
+wget -O /root/mrtg-mem.sh "https://budaksabah704.me/Debian8/mrtg-mem.sh"
 chmod +x /root/mrtg-mem.sh
 cd /etc/snmp/
 sed -i 's/TRAPDRUN=no/TRAPDRUN=yes/g' /etc/default/snmpd
@@ -178,7 +178,7 @@ service snmpd restart
 snmpwalk -v 1 -c public localhost 1.3.6.1.4.1.2021.10.1.3.1
 mkdir -p /home/vps/public_html/mrtg
 cfgmaker --zero-speed 100000000 --global 'WorkDir: /home/vps/public_html/mrtg' --output /etc/mrtg.cfg public@localhost
-curl "https://samreysteven91.000webhostapp.com/Debian8/mrtg.conf" >> /etc/mrtg.cfg
+curl "https://budaksabah704.me/Debian8/mrtg.conf" >> /etc/mrtg.cfg
 sed -i 's/WorkDir: \/var\/www\/mrtg/# WorkDir: \/var\/www\/mrtg/g' /etc/mrtg.cfg
 sed -i 's/# Options\[_\]: growright, bits/Options\[_\]: growright/g' /etc/mrtg.cfg
 indexmaker --output=/home/vps/public_html/mrtg/index.html /etc/mrtg.cfg
@@ -211,7 +211,7 @@ clear
 
 # install webmin
 cd
-wget "https://samreysteven91.000webhostapp.com/Debian8/webmin_1.801_all.deb"
+wget "https://budaksabah704.me/Debian8/webmin_1.801_all.deb"
 dpkg --install webmin_1.801_all.deb;
 apt-get -y -f install;
 sed -i 's/ssl=1/ssl=0/g' /etc/webmin/miniserv.conf
@@ -221,98 +221,22 @@ service vnstat restart
 
 
 # install badvpn
-wget -O /usr/bin/badvpn-udpgw "https://samreysteven91.000webhostapp.com/Debian8/badvpn-udpgw"
+wget -O /usr/bin/badvpn-udpgw "https://budaksabah704.me/Debian8/badvpn-udpgw"
 if [ "$OS" == "x86_64" ]; then
-  wget -O /usr/bin/badvpn-udpgw "https://samreysteven91.000webhostapp.com/Debian8/badvpn-udpgw64"
+  wget -O /usr/bin/badvpn-udpgw "https://budaksabah704.me/Debian8/badvpn-udpgw64"
 fi
 sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/rc.local
 chmod +x /usr/bin/badvpn-udpgw
 screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
 
 
-#!/bin/bash
 
-# text gambar
-apt-get install boxes
+# MENU
+wget https://budaksabah704.me/Debian8.com/Menu/setup.sh
+chmod +x setup.sh
+./setup.sh
 
-# color text
-cd
-rm -rf /root/.bashrc
-wget -O /root/.bashrc "https://samreysteven91.000webhostapp.com/Menu/.bashrc"
 
-# install lolcat
-sudo apt-get -y install ruby
-sudo gem install lolcat
-
-# download script
-cd
-wget -O /usr/bin/motd "https://samreysteven91.000webhostapp.com/Menu/motd"
-wget -O /usr/bin/benchmark "https://samreysteven91.000webhostapp.com/Menu/benchmark.sh"
-wget -O /usr/bin/speedtest "https://samreysteven91.000webhostapp.com/Menu/speedtest_cli.py"
-wget -O /usr/bin/ps-mem "https://samreysteven91.000webhostapp.com/Menu/ps_mem.py"
-wget -O /usr/bin/dropmon "https://samreysteven91.000webhostapp.com/Menu/dropmon.sh"
-wget -O /usr/bin/menu "https://samreysteven91.000webhostapp.com/Menu/menu.sh"
-wget -O /usr/bin/user-active-list "https://samreysteven91.000webhostapp.com/Menu/user-active-list.sh"
-wget -O /usr/bin/user-add "https://samreysteven91.000webhostapp.com/Menu/user-add.sh"
-wget -O /usr/bin/user-add-pptp "https://samreysteven91.000webhostapp.com/Menu/user-add-pptp.sh"
-wget -O /usr/bin/user-del "https://samreysteven91.000webhostapp.com/Menu/user-del.sh"
-wget -O /usr/bin/disable-user-expire "https://samreysteven91.000webhostapp.com/Menu/disable-user-expire.sh"
-wget -O /usr/bin/delete-user-expire "https://samreysteven91.000webhostapp.com/Menu/delete-user-expire.sh"
-wget -O /usr/bin/banned-user "https://samreysteven91.000webhostapp.com/Menu/banned-user.sh"
-wget -O /usr/bin/unbanned-user "https://samreysteven91.000webhostapp.com/Menu/unbanned-user.sh"
-wget -O /usr/bin/user-expire-list "https://samreysteven91.000webhostapp.com/Menu/user-expire-list.sh"
-wget -O /usr/bin/user-gen "https://samreysteven91.000webhostapp.com/Menu/user-gen.sh"
-wget -O /usr/bin/userlimit.sh "https://samreysteven91.000webhostapp.com/Menu/userlimit.sh"
-wget -O /usr/bin/userlimitssh.sh "https://samreysteven91.000webhostapp.com/Menu/userlimitssh.sh"
-wget -O /usr/bin/user-list "https://samreysteven91.000webhostapp.com/Menu/user-list.sh"
-wget -O /usr/bin/user-login "https://samreysteven91.000webhostapp.com/Menu/user-login.sh"
-wget -O /usr/bin/user-pass "https://samreysteven91.000webhostapp.com/Menu/user-pass.sh"
-wget -O /usr/bin/user-renew "https://samreysteven91.000webhostapp.com/Menu/user-renew.sh"
-wget -O /usr/bin/clearcache.sh "https://samreysteven91.000webhostapp.com/Menu/clearcache.sh"
-wget -O /usr/bin/bannermenu "https://samreysteven91.000webhostapp.com/Menu/bannermenu"
-cd
-
-#rm -rf /etc/cron.weekly/
-#rm -rf /etc/cron.hourly/
-#rm -rf /etc/cron.monthly/
-rm -rf /etc/cron.daily/
-wget -O /root/passwd "https://samreysteven91.000webhostapp.com/Menu/passwd.sh"
-chmod +x /root/passwd
-echo "01 23 * * * root /root/passwd" > /etc/cron.d/passwd
-
-echo "*/30 * * * * root service dropbear restart" > /etc/cron.d/dropbear
-echo "00 23 * * * root /usr/bin/disable-user-expire" > /etc/cron.d/disable-user-expire
-echo "0 */12 * * * root /sbin/reboot" > /etc/cron.d/reboot
-#echo "00 01 * * * root echo 3 > /proc/sys/vm/drop_caches && swapoff -a && swapon -a" > /etc/cron.d/clearcacheram3swap
-echo "*/30 * * * * root /usr/bin/clearcache.sh" > /etc/cron.d/clearcache1
-
-cd
-chmod +x /usr/bin/motd
-chmod +x /usr/bin/benchmark
-chmod +x /usr/bin/speedtest
-chmod +x /usr/bin/ps-mem
-#chmod +x /usr/bin/autokill
-chmod +x /usr/bin/dropmon
-chmod +x /usr/bin/menu
-chmod +x /usr/bin/user-active-list
-chmod +x /usr/bin/user-add
-chmod +x /usr/bin/user-add-pptp
-chmod +x /usr/bin/user-del
-chmod +x /usr/bin/disable-user-expire
-chmod +x /usr/bin/delete-user-expire
-chmod +x /usr/bin/banned-user
-chmod +x /usr/bin/unbanned-user
-chmod +x /usr/bin/user-expire-list
-chmod +x /usr/bin/user-gen
-chmod +x /usr/bin/userlimit.sh
-chmod +x /usr/bin/userlimitssh.sh
-chmod +x /usr/bin/user-list
-chmod +x /usr/bin/user-login
-chmod +x /usr/bin/user-pass
-chmod +x /usr/bin/user-renew
-chmod +x /usr/bin/clearcache.sh
-chmod +x /usr/bin/bannermenu
-cd
 
 # restart service
 service ssh restart
