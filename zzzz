@@ -57,7 +57,7 @@ apt-get -y remove sendmail*
 apt-get update; apt-get -y upgrade;
 
 # install webserver
-apt-get -y install nginx php5-fpm php5-cli
+apt-get -y install nginx
 
 # install essential package
 echo "mrtg mrtg/conf_mods boolean true" | debconf-set-selections
@@ -293,7 +293,7 @@ chmod +x setup
 apt-get -y autoremove
 chown -R www-data:www-data /home/vps/public_html
 service nginx start
-service php5-fpm start
+
 service vnstat restart
 service openvpn restart
 service snmpd restart
