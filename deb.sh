@@ -33,8 +33,8 @@ sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 service ssh restart
 
 # set repo
-wget -O /etc/apt/sources.list "https://raw.githubusercontent.com/Mbah-Shondong/Debian732/master/Debian7/sources.list.debian7"
-wget "http://www.dotdeb.org/dotdeb.gpg"
+wget -O /etc/apt/sources.list "https://raw.githubusercontent.com/GegeEmbrie/autosshvpn/master/file/sources.list.debian7.lokal"
+wget "https://raw.githubusercontent.com/GegeEmbrie/autosshvpn/master/file/dotdeb.gpg"
 wget "http://www.webmin.com/jcameron-key.asc"
 cat dotdeb.gpg | apt-key add -;rm dotdeb.gpg
 cat jcameron-key.asc | apt-key add -;rm jcameron-key.asc
@@ -107,12 +107,6 @@ echo "deb http://dl.bintray.com/dawidd6/neofetch jessie main" | sudo tee -a /etc
 curl -L "https://bintray.com/user/downloadSubjectPublicKey?username=bintray" -o Release-neofetch.key && sudo apt-key add Release-neofetch.key && rm Release-neofetch.key
 apt-get update
 apt-get install neofetch
-
-echo "clear" >> .bashrc
-echo 'echo -e "WELCOME GRETONGER $HOSTNAME"' >> .bashrc
-echo 'echo -e "Script By MBAH SHONDONG"' >> .bashrc
-echo 'echo -e "Ketik menu untuk menampilkan daftar perintah"' >> .bashrc
-echo 'echo -e ""' >> .bashrc
 
 # Swap Ram
 dd if=/dev/zero of=/swapfile bs=1024 count=1024k
@@ -190,18 +184,18 @@ sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/
 chmod +x /usr/bin/badvpn-udpgw
 screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
 
+
 # install mrtg
-#apt-get update;apt-get -y install snmpd;
-wget -O /etc/snmp/snmpd.conf "https://raw.githubusercontent.com/Mbah-Shondong/Debian732/master/Debian7/snmpd.conf"
-wget -O /root/mrtg-mem "https://raw.githubusercontent.com/Mbah-Shondong/Debian732/master/Debian7/mrtg-mem.sh"
-chmod +x /root/mrtg-mem
+wget -O /etc/snmp/snmpd.conf "http://borneobesthosting.me/autoscript/premium-debian/snmpd.conf"
+wget -O /root/mrtg-mem.sh "http://borneobesthosting.me/autoscript/premium-debian/mrtg-mem.sh"
+chmod +x /root/mrtg-mem.sh
 cd /etc/snmp/
 sed -i 's/TRAPDRUN=no/TRAPDRUN=yes/g' /etc/default/snmpd
 service snmpd restart
 snmpwalk -v 1 -c public localhost 1.3.6.1.4.1.2021.10.1.3.1
 mkdir -p /home/vps/public_html/mrtg
 cfgmaker --zero-speed 100000000 --global 'WorkDir: /home/vps/public_html/mrtg' --output /etc/mrtg.cfg public@localhost
-curl "https://raw.githubusercontent.com/Mbah-Shondong/Debian732/master/Debian7/mrtg.conf" >> /etc/mrtg.cfg
+curl "http://borneobesthosting.me/autoscript/premium-debian/mrtg.conf" >> /etc/mrtg.cfg
 sed -i 's/WorkDir: \/var\/www\/mrtg/# WorkDir: \/var\/www\/mrtg/g' /etc/mrtg.cfg
 sed -i 's/# Options\[_\]: growright, bits/Options\[_\]: growright/g' /etc/mrtg.cfg
 indexmaker --output=/home/vps/public_html/mrtg/index.html /etc/mrtg.cfg
@@ -209,6 +203,7 @@ if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; e
 if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
 if [ -x /usr/bin/mrtg ] && [ -r /etc/mrtg.cfg ]; then mkdir -p /var/log/mrtg ; env LANG=C /usr/bin/mrtg /etc/mrtg.cfg 2>&1 | tee -a /var/log/mrtg/mrtg.log ; fi
 cd
+
 
 # setting port ssh
 sed -i 's/Port 22/Port 22/g' /etc/ssh/sshd_config
