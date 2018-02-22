@@ -56,7 +56,7 @@ vps="blangkon";
 #if [[ $vps = "zvur" ]]; then
 	#source="http://"
 #else
-	source="http://vpsproject.me/site5/Debian7"
+	source="http://vpsproject.me/Debian7"
 #fi
 
 # go to root
